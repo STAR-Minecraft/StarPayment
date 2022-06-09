@@ -1,0 +1,15 @@
+name: StarPayment
+version: '${project.version}'
+main: ru.starmc.starpayment.StarPaymentPlugin
+api-version: 1.15
+depend:
+  - LuckPerms
+  - PEconomy
+commands:
+  starpayment:
+    aliases:
+      - stardonate
+      - donate
+  starpaymentgive:
+    aliases:
+      - givedonate

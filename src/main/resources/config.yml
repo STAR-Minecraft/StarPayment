@@ -1,0 +1,213 @@
+# StarPaymentPlugin
+
+# Настройки базы данных
+database:
+
+  # Тип базы данных
+  # Поддерживаемые типы: [mysql, sqlite, postgresql]
+  type: sqlite
+
+  # Настройка подключения MySQL
+  mysql:
+    host: localhost
+    port: 3306
+    name: headsfinder
+    user: admin
+    password: headsfinder
+    params:
+      - 'autoReconnect=true'
+      - 'useSSL=DISABLED'
+
+  # Настройка подключения PostgreSQL
+  postgresql:
+    host: localhost
+    port: 5432
+    name: headsfinder
+    user: admin
+    password: headsfinder
+    params:
+      - 'autoReconnect=true'
+      - 'useSSL=DISABLED'
+
+  # Настройка подключения SQLite
+  sqlite:
+    file: database.db
+
+# Бонусы групп
+groupBonuses:
+
+  # Название группы (из LuckPerms)
+  default:
+
+    # Бонус, в процентах от суммы, который
+    # получает игрок за покупки с его промокодом
+    own: 1 # (%) значение в процентах
+
+    # Бонус, который получает покупатель
+    # использующий реферальный код игрока
+    referral: 1 # (%) значение в процентах
+
+  vip:
+    own: 2
+    referral: 1
+
+# Заявки на вывод бонусов в реальную валюту
+bonusWithdraw:
+  enabled: true
+  minSum: 100 # минимальная сумма для создания заявки
+
+# Настройка оплаты
+payment:
+  accessKey: "6789a89480c170ea1ccac30b3979cae9" # ключ доступа
+  productId: 168829 # id продукта из EasyDonate
+  serverId: 26654 # id сервера из EasyDonate
+  redirectURL: "https://vk.com/osk115" # ссылка, которая откроется после оплаты
+  currency: "dollars" # валюта из PEconomy
+  minSum: 50 # минимальная сумма для создания оплаты
+
+menu:
+
+  main:
+
+    title: "     &8Покупка донат-валюты"
+    rows: 3
+
+    filler:
+      enabled: true
+      material: BLACK_STAINED_GLASS_PANE
+
+    infoItem:
+      slot: 10
+      material: GOLD_INGOT
+      name: "&eИнформация"
+      lore:
+        - " "
+        - " &fВы реферал игрока &e{refer} "
+        - " "
+        - "  &7Вы получаете &e{own_refer_bonus}% &7бонусов "
+        - "  &7за каждую покупку"
+        - " "
+        - "  &7Ваш рефер получает {refer_bonus}% &7бонусами "
+        - "  &7от каждой вашей покупки"
+        - ""
+        - " &a» Нажмите, чтобы изменить реферальный код "
+        - " "
+
+    buyItem:
+      slot: 13
+      material: NETHER_STAR
+      name: "&eКупить валюту"
+      lore:
+        - " "
+        - " &7Введите сумму пополнения и "
+        - " &7оплатите покупку по ссылке "
+        - " "
+        - " &a» Нажмите, чтобы купить валюту "
+        - " "
+
+    referralSystemItem:
+      slot: 16
+      material: QUARTZ
+      name: "&eРеферальная система"
+      lore:
+        - ""
+        - " &fВаш реферальный код &e{code} &7(ваш ник)"
+        - "  &7Вы получаете &e{own_bonus}% &7бонусов от "
+        - "  &7каждой покупки ваших рефералов"
+        - "  &7Рефералы получают на &e{referral_bonus}% &7больше "
+        - "  &7за каждую покупку с вашим кодом"
+        - ""
+        - " &fУ вас &e{bonus} бонусов"
+        - ""
+        - " &aЛКМ » Нажмите, чтобы получить накопленные бонусы"
+        - " &6ПКМ » Нажмите, чтобы создать заявку на вывод"
+        - " &6бонусов в рубли &7(минимум 100 бонусов)"
+        - ""
+
+anvil:
+
+  changeReferral:
+
+    title: "Реферальный код:"
+    text: "код"
+
+  createPayment:
+
+    title: "Сумма пополнения:"
+    text: "0"
+
+  createWithdrawRequest:
+
+    title: "Способ связи:"
+    text: "vk.com/"
+
+messages:
+
+  noPerm:
+    - " &c[!] &fНедостаточно прав для использования данной команды"
+
+  console:
+    - " &c[!] &fВы должны быть игроком для выполнения данной команды"
+
+  load:
+    - " &7[*] Ваши данные загружаются, пожалуйста выполните команду позже"
+
+  checkReferralCode:
+    - " &7[*] Проверка реферального кода..."
+
+  referralCodeNotFound:
+    - " &c[!] Реферальный код не найден! Проверьте правильность "
+    - " &fвведенного кода и повторите попытку"
+
+  referralCodeIsPlayerName:
+    - " &c[!] &fВы не можете использовать свой реферальный код!"
+
+  referralCodeSet:
+    - " &a[+] &fРеферальный код найден и установлен"
+
+  inputNotNumber:
+    - " &c[!] &fВведенное значение не является числом!"
+
+  numberLessThenMin:
+    - " &c[!] &fВведенное значение меньше минимального!"
+    - " &7[?] Сумма пополнения должна быть более {min_sum}"
+
+  linkLoad:
+    - " &7[*] Ссылка для оплаты создается..."
+
+  linkCreated:
+    - " "
+    - " &a[+] &fСсылка для оплаты создана!"
+    - " "
+    - " &fОплатите вашу покупку по ссылке:"
+    - " &d{link}"
+    - " "
+
+  giveDonateHelp:
+    - " &c[!] &fНедостаточно аргументов!"
+    - " &7[?] Используйте: /givedonate [игрок] [количество]"
+
+  giveDonateSuccessful:
+    - " &a[+] &fДонат выдан"
+
+  giveDonateBonusLoad:
+    - " &7[*] Выдача бонусов..."
+
+  giveDonatePlayerNotFound:
+    - " &7[*] &fИгрок не найден в базе данных"
+
+  giveDonatePlayerNotHaveRefer:
+    - " &7[*] У игрока нет реферального кода"
+
+  giveDonateBonusSuccessful:
+    - " &a[+] &fБонусы выданы"
+
+  bonusTook:
+    - " &a[+] &fБонусы сняты"
+
+  withdrawRequestCreated:
+    - " &a[+] &fЗаявка на вывод бонусов создана"
+
+  notEnoughBonusToWithdraw:
+    - " &c[!] &fНедостаточно бонусов для вывода"
+    - " &7[*] Минимальная сумма: 100 бонусов"

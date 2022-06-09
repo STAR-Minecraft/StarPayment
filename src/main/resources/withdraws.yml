@@ -1,0 +1,7 @@
+# Список заявок на вывод
+requests:
+
+  "UUID заявки":
+    player: "Ник игрока"
+    sum: 100
+    comment: "vk.com/osk115"

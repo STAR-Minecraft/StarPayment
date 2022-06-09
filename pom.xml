@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>StarPayment</groupId>
+    <artifactId>StarPayment</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>StarPayment</name>
+
+    <properties>
+
+        <!-- Project building -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
+
+        <!-- Dependencies -->
+        <papermc.api.version>1.15.2-R0.1-SNAPSHOT</papermc.api.version>
+        <lombok.version>1.18.22</lombok.version>
+        <ormlite.version>6.1</ormlite.version>
+        <luckperms.version>5.4</luckperms.version>
+        <peconomy.version>2.7.3</peconomy.version>
+        <easydonate4j.version>2.0.6</easydonate4j.version>
+        <mojang.authlib.version>1.5.21</mojang.authlib.version>
+        <anvilgui.version>1.5.3-SNAPSHOT</anvilgui.version>
+
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <repositories>
+
+        <repository>
+            <id>papermc-repo</id>
+            <url>https://papermc.io/repo/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>minecraft-repo</id>
+            <url>https://libraries.minecraft.net/</url>
+        </repository>
+        <repository>
+            <id>codemc-snapshots</id>
+            <url>https://repo.codemc.io/repository/maven-snapshots/</url>
+        </repository>
+
+    </repositories>
+
+    <dependencies>
+
+        <!-- Paper API -->
+        <dependency>
+            <groupId>com.destroystokyo.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>${papermc.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ORMLite -->
+        <dependency>
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-core</artifactId>
+            <version>${ormlite.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-jdbc</artifactId>
+            <version>${ormlite.version}</version>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- LuckPerms -->
+        <dependency>
+            <groupId>net.luckperms</groupId>
+            <artifactId>api</artifactId>
+            <version>${luckperms.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- PEconomy -->
+        <dependency>
+            <groupId>me.soknight</groupId>
+            <artifactId>peconomy</artifactId>
+            <version>${peconomy.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- EasyDonate4J -->
+        <dependency>
+            <groupId>ru.easydonate.easydonate4j</groupId>
+            <artifactId>api-v3</artifactId>
+            <version>${easydonate4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- EasyDonate4J Modules -->
+        <dependency>
+            <groupId>ru.easydonate.easydonate4j</groupId>
+            <artifactId>jdk-legacy-http-client</artifactId>
+            <version>${easydonate4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.easydonate.easydonate4j</groupId>
+            <artifactId>gson-json-provider</artifactId>
+            <version>${easydonate4j.version}</version>
+            <!-- Исключение зависимости GSON при условии, -->
+            <!-- что она предоставляется ядром сервера -->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Mojang AuthLib -->
+        <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>authlib</artifactId>
+            <version>${mojang.authlib.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Anvil GUI -->
+        <dependency>
+            <groupId>net.wesjd</groupId>
+            <artifactId>anvilgui</artifactId>
+            <version>${anvilgui.version}</version>
+        </dependency>
+
+    </dependencies>
+</project>
